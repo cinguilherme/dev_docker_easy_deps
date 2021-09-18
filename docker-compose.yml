@@ -29,3 +29,18 @@ services:
       - 9300:9300
     environment: 
       - discovery.type=single-node
+
+# redis
+  redis_dev:
+    image: redis:6.2
+    ports: 
+      - 6379:6379
+
+# infinispan -> docker run --name span-infi -p 11222:11222 -e USER="root" -e PASS="root" infinispan/server
+  infinispan_dev:
+    image: infinispan/server
+    ports: 
+      - 11222:11222
+    environment: 
+      - USER=root
+      - PASS=root
