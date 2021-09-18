@@ -1,0 +1,31 @@
+version: "3"
+
+services: 
+
+# docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name quarkus_test -e POSTGRES_USER=local -e POSTGRES_PASSWORD=local -e POSTGRES_DB=local-db -p 5432:5432 postgres:11.5
+  postgres_dev:
+    image: postgres:11.5
+    ports: 
+      - 5432:5432
+    environment: 
+      - POSTGRES_USER=local
+      - POSTGRES_PASSWORD=local
+      - POSTGRES_DB=local-db
+
+# docker run -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME="root" -e MONGO_INITDB_ROOT_PASSWORD="root" mongo
+  mongo_dev:
+    image: mongo
+    ports: 
+      - 27017:27017
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD="root"
+
+# docker run -d --name elasticsearch-quarkus -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.14.1
+  elastic_dev:
+    image: elasticsearch:7.14.1
+    ports: 
+      - 9200:9200
+      - 9300:9300
+    environment: 
+      - discovery.type=single-node
